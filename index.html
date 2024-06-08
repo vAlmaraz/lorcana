@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculador de Probabilidades de Cartas</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        button, textarea {
+            margin-bottom: 20px;
+            display: block;
+        }
+        textarea {
+            width: 100%;
+            height: 150px;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid black;
+        }
+        th, td {
+            padding: 10px;
+            text-align: left;
+        }
+        #modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            max-height: 100%;
+            overflow: auto;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.25);
+            z-index: 1000;
+        }
+        #modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 900;
+        }
+        #closeModal {
+            margin-top: 20px;
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <h1>Calculador de Probabilidades de Cartas</h1>
+    <textarea id="cardData" placeholder="Ejemplo del formato esperado:
+2 Nombre de la carta
+4 Nombre de otra carta
+..."></textarea>
+    <button id="processText1">Calcular Probabilidades Empezando Primero</button>
+    <button id="processText2">Calcular Probabilidades Como Segundo</button>
+    <table id="resultsTable">
+        <thead>
+            <tr>
+                <th>Turno</th>
+                <th>Cartas Más Probables</th>
+                <th>Probabilidad</th>
+            </tr>
+        </thead>
+        <tbody id="resultsBody">
+        </tbody>
+    </table>
+
+    <div id="modal">
+        <h2>Probabilidades Detalladas</h2>
+        <button id="closeModal">Cerrar</button>
+        <table id="detailedTable">
+            <thead>
+                <tr>
+                    <th>Carta</th>
+                    <th>Probabilidad</th>
+                </tr>
+            </thead>
+            <tbody id="detailedBody">
+            </tbody>
+        </table>
+    </div>
+    <div id="modal-overlay"></div>
+
+    <script src="script.js"></script>
+</body>
+</html>
