@@ -60,7 +60,12 @@ function calculateMostProbable(cardCounts, totalCards, drawnCards, draws) {
         }
     }
 
-    probabilities.sort((a, b) => b.probability - a.probability);
+    probabilities.sort((a, b) => {
+        if (b.probability === a.probability) {
+            return Math.random() - 0.5;
+        }
+        return b.probability - a.probability;
+    });
 
     const mostProbableCards = probabilities.slice(0, draws).map(p => p.card);
     const mostProbableProbabilities = probabilities.slice(0, draws).map(p => p.probability.toFixed(4));
