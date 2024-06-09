@@ -3,11 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Calculador de Probabilidades de Cartas</title>
+    <title>Lorcana - Calculadora de Probabilidades</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 20px;
+        }
+        .tabs {
+            display: flex;
+            margin-bottom: 20px;
+            cursor: pointer;
+            border-bottom: 1px solid black;
+        }
+        .tab {
+            padding: 10px;
+            border: 1px solid black;
+            border-bottom: none;
+            background-color: lightgray;
+        }
+        .tab-active {
+            background-color: white;
+        }
+        .tab-content {
+            display: none;
+        }
+        .tab-content-active {
+            display: block;
         }
         button, textarea {
             margin-bottom: 20px;
@@ -29,7 +50,11 @@
             padding: 10px;
             text-align: left;
         }
-        #modal {
+        td select {
+            width: 100%;
+            text-align: left;
+        }
+        .modal {
             display: none;
             position: fixed;
             top: 50%;
@@ -59,28 +84,56 @@
     </style>
 </head>
 <body>
-    <h1>Calculador de Probabilidades de Cartas</h1>
+    <h1>Lorcana - Calculadora de Probabilidades</h1>
+    <p>Exporta tu mazo de Dreamborn y pégalo aquí</p>
     <textarea id="cardData" placeholder="Ejemplo del formato esperado:
 2 Nombre de la carta
 4 Nombre de otra carta
 ..."></textarea>
-    <button id="processText1">Calcular Probabilidades Empezando Primero</button>
-    <button id="processText2">Calcular Probabilidades Como Segundo</button>
-    <table id="resultsTable">
-        <thead>
-            <tr>
-                <th>Turno</th>
-                <th>Cartas Más Probables</th>
-                <th>Probabilidad</th>
-            </tr>
-        </thead>
-        <tbody id="resultsBody">
-        </tbody>
-    </table>
 
-    <div id="modal">
+    <div class="tabs">
+        <div id="tab1" class="tab tab-active">Calcular probabilidades</div>
+        <div id="tab2" class="tab">Companion</div>
+    </div>
+
+    <div id="content1" class="tab-content tab-content-active">
+        <button id="processText1">Empiezo yo</button>
+        <button id="processText2">Voy segundo</button>
+        <table id="resultsTable">
+            <thead>
+                <tr>
+                    <th>Turno</th>
+                    <th>Cartas Más Probables</th>
+                    <th>Probabilidad</th>
+                </tr>
+            </thead>
+            <tbody id="resultsBody">
+            </tbody>
+        </table>
+    </div>
+
+    <div id="content2" class="tab-content">
+        <h2>Companion</h2>
+        <p>Según vayan saliendo cartas durante el juego, actualiza esta tabla para ver las probabilidades de que salga cada carta en el siguiente robo.</p>
+        <button id="processText3">Iniciar</button>
+        <button id="showRemainingCards">Ver Cartas Restantes</button>
+        <table id="companionTable">
+            <thead>
+                <tr>
+                    <th>Carta</th>
+                    <th>Total</th>
+                    <th>En juego</th>
+                    <th>Probabilidad Siguiente Turno</th>
+                </tr>
+            </thead>
+            <tbody id="companionBody">
+            </tbody>
+        </table>
+    </div>
+
+    <div id="modal-probs" class="modal">
         <h2>Probabilidades Detalladas</h2>
-        <button id="closeModal">Cerrar</button>
+        <button class="closeModal">Cerrar</button>
         <table id="detailedTable">
             <thead>
                 <tr>
@@ -89,6 +142,20 @@
                 </tr>
             </thead>
             <tbody id="detailedBody">
+            </tbody>
+        </table>
+    </div>
+    <div id="modal-companion" class="modal">
+        <h2>Cartas Restantes por Probabilidad</h2>
+        <button class="closeModal">Cerrar</button>
+        <table id="remainingCardsTable">
+            <thead>
+                <tr>
+                    <th>Carta</th>
+                    <th>Probabilidad</th>
+                </tr>
+            </thead>
+            <tbody id="modalBody">
             </tbody>
         </table>
     </div>
