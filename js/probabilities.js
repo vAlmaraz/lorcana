@@ -54,7 +54,7 @@ function appendResult(container, turn, cards, probabilities, cardCounts, totalCa
     detailsButton.classList.add('showModal');
     detailsButton.setAttribute('data-turn', 'turn-' + turn);
     detailsButton.addEventListener('click', function() {
-        document.getElementById('modal-probabilities').style.display = 'block';
+        document.getElementById('modalProbabilities').style.display = 'block';
         document.getElementById('modal-overlay').style.display = 'block';
         document.getElementById('detailedBody').innerHTML = document.getElementById(this.getAttribute('data-turn')).innerHTML;
     });

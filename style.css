@@ -24,6 +24,12 @@ body {
 .tab-content-active {
     display: block;
 }
+.actions {
+    display: flex;
+}
+.actions button {
+    margin-right: 20px;
+}
 button, textarea {
     margin-bottom: 20px;
     display: block;

@@ -24,8 +24,10 @@
     </div>
 
     <div id="content1" class="tab-content tab-content-active">
-        <button id="processText1">Empiezo yo</button>
-        <button id="processText2">Voy segundo</button>
+        <div class="actions">
+            <button id="probabilitiesStartFirst">Empiezo yo</button>
+            <button id="probabilitiesStartSecond">Voy segundo</button>
+        </div>
         <table id="resultsTable">
             <thead>
                 <tr>
@@ -42,8 +44,11 @@
     <div id="content2" class="tab-content">
         <h2>Companion</h2>
         <p>Según vayan saliendo cartas durante el juego, actualiza esta tabla para ver las probabilidades de que salga cada carta en el siguiente robo.</p>
-        <button id="processText3">Iniciar</button>
-        <button id="showRemainingCards">Ver Cartas Restantes</button>
+        <div class="actions">
+            <button id="companionInitialize">Iniciar</button>
+            <button id="companionDrawSeven">Robo inicial de 7 cartas</button>
+            <button id="companionRemainingCards">Ver Cartas Restantes</button>
+        </div>
         <table id="companionTable">
             <thead>
                 <tr>
@@ -58,7 +63,7 @@
         </table>
     </div>
 
-    <div id="modal-probabilities" class="modal">
+    <div id="modalProbabilities" class="modal">
         <h2>Probabilidades Detalladas</h2>
         <button class="closeModal">Cerrar</button>
         <table id="detailedTable">
@@ -72,7 +77,7 @@
             </tbody>
         </table>
     </div>
-    <div id="modal-companion" class="modal">
+    <div id="modalCompanion" class="modal">
         <h2>Cartas Restantes por Probabilidad</h2>
         <button class="closeModal">Cerrar</button>
         <table id="remainingCardsTable">

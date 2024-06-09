@@ -6,22 +6,27 @@ document.getElementById('tab2').addEventListener('click', function() {
     showTab('content2', 'tab2');
 });
 
-document.getElementById('processText1').addEventListener('click', function() {
+document.getElementById('probabilitiesStartFirst').addEventListener('click', function() {
     processTextData();
     calculateProbabilities(7);
 });
 
-document.getElementById('processText2').addEventListener('click', function() {
+document.getElementById('probabilitiesStartSecond').addEventListener('click', function() {
     processTextData();
     calculateProbabilities(8);
 });
 
-document.getElementById('processText3').addEventListener('click', function() {
+document.getElementById('companionInitialize').addEventListener('click', function() {
     processTextData();
     updateCompanionTable();
 });
 
-document.getElementById('showRemainingCards').addEventListener('click', function() {
+document.getElementById('companionDrawSeven').addEventListener('click', function() {
+    processTextData();
+    selectTopCards(7);
+});
+
+document.getElementById('companionRemainingCards').addEventListener('click', function() {
     generateRemainingCardsTable();
 });
 

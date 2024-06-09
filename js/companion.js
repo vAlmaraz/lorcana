@@ -60,6 +60,41 @@ function countDrawnCards() {
     return drawnCards;
 }
 
+function selectTopCards(cardsToDraw) {
+    updateCompanionTable();
+    const drawnCards = {};
+    const sortedCards = Object.keys(cardCounts).sort((a, b) => {
+        const probabilityA = (cardCounts[a] / totalCards) * 100;
+        const probabilityB = (cardCounts[b] / totalCards) * 100;
+        return probabilityB - probabilityA;
+    });
+
+    for (let i = 0; i < Math.min(cardsToDraw, sortedCards.length); i++) {
+        const card = sortedCards[i];
+        const remainingCount = cardCounts[card] - (drawnCards[card] || 0);
+        const probability = (remainingCount / (totalCards - Object.values(drawnCards).reduce((a, b) => a + b, 0))) * 100;
+
+        const cardsWithSameProbability = sortedCards.filter(c => {
+            const remainingCount = cardCounts[c] - (drawnCards[c] || 0);
+            const p = (remainingCount / (totalCards - Object.values(drawnCards).reduce((a, b) => a + b, 0))) * 100;
+            return p.toFixed(2) === probability.toFixed(2);
+        });
+        const randomCard = cardsWithSameProbability[Math.floor(Math.random() * cardsWithSameProbability.length)];
+
+        drawnCards[randomCard] = (drawnCards[randomCard] || 0) + 1;
+    }
+
+    const selectInputs = document.querySelectorAll('#companionBody select');
+    selectInputs.forEach(select => {
+        const cardName = select.closest('tr').querySelector('td:first-child').innerText;
+        if (drawnCards[cardName] !== undefined) {
+            select.value = drawnCards[cardName];
+        } else {
+            select.value = 0;
+        }
+    });
+}
+
 function generateRemainingCardsTable() {
     const drawnCards = countDrawnCards();
     const remainingCards = {};
@@ -89,6 +124,6 @@ function generateRemainingCardsTable() {
         modalBody.appendChild(row);
     });
 
-    document.getElementById('modal-companion').style.display = 'block';
+    document.getElementById('modalCompanion').style.display = 'block';
     document.getElementById('modal-overlay').style.display = 'block';
 }
