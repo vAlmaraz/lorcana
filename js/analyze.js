@@ -12,7 +12,7 @@ const apis = {
         'body': 'results'
     }
 }
-const apiToUse = 'lorcana-api';
+let apiToUse = 'lorcast';
 
 async function analyzeDeck() {
     showLoading();
