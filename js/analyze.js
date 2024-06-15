@@ -72,6 +72,7 @@ function hideLoading() {
 }
 
 function hideTabs() {
+    document.getElementById('analyze').style.display = 'none';
     document.getElementById('tabs').style.display = 'none';
     let activeTab = document.getElementsByClassName('tab-content-active');
     if (activeTab.length > 0) {
@@ -80,6 +81,7 @@ function hideTabs() {
 }
 
 function showTabs() {
+    document.getElementById('analyze').style.display = 'block';
     document.getElementById('tabs').style.display = 'flex';
     showTab('content1', 'tab1');
 
