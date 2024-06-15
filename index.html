@@ -5,10 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Lorcana - Calculadora de Probabilidades</title>
     <link rel="stylesheet" href="style.css">
-    <script>
-        let cardCounts = {};
-        let totalCards = 0;
-    </script>
 </head>
 <body>
     <h1>Lorcana - Calculadora de Probabilidades</h1>
@@ -18,12 +14,23 @@
 4 Nombre de otra carta
 ..."></textarea>
 
-    <div class="tabs">
-        <div id="tab1" class="tab tab-active">Calcular probabilidades</div>
-        <div id="tab2" class="tab">Companion</div>
+    <div>
+        <button id="analyze" class="left">Analizar Mazo</button>
+        <button id="reset" class="right">Borrar datos locales</button>
+        <div class="clear"></div>
     </div>
 
-    <div id="content1" class="tab-content tab-content-active">
+    <div id="loading">
+        <p>Analizando... Por favor, espere</p>
+    </div>
+
+    <div id="tabs">
+        <div id="tab1" class="tab tab-active">Robos por turno</div>
+        <div id="tab2" class="tab">Companion</div>
+        <div id="tab3" class="tab">Deck Info</div>
+    </div>
+
+    <div id="content1" class="tab-content">
         <div class="actions">
             <button id="probabilitiesStartFirst">Empiezo yo</button>
             <button id="probabilitiesStartSecond">Voy segundo</button>
@@ -45,7 +52,6 @@
         <h2>Companion</h2>
         <p>Según vayan saliendo cartas durante el juego, actualiza esta tabla para ver las probabilidades de que salga cada carta en el siguiente robo.</p>
         <div class="actions">
-            <button id="companionInitialize">Iniciar</button>
             <button id="companionDrawSeven">Robo inicial de 7 cartas</button>
             <button id="companionRemainingCards">Ver Cartas Restantes</button>
         </div>
@@ -59,6 +65,29 @@
                 </tr>
             </thead>
             <tbody id="companionBody">
+            </tbody>
+        </table>
+    </div>
+
+    <div id="content3" class="tab-content">
+        <h2>Deck Info</h2>
+        <p>Estadísticas e información del mazo. Selecciona el objetivo de cada carta. Después, haz click en Ver Porcentajes</p>
+        <div class="actions">
+            <button id="deckInfoCalculate">Ver Porcentajes</button>
+        </div>
+        <table id="deckInfoTable">
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Carta</th>
+                    <th>Tipo</th>
+                    <th>Coste</th>
+                    <th>Inkable</th>
+                    <th>Texto</th>
+                    <th>Objetivo</th>
+                </tr>
+            </thead>
+            <tbody id="deckInfoBody">
             </tbody>
         </table>
     </div>
@@ -91,10 +120,46 @@
             </tbody>
         </table>
     </div>
+    <div id="modalDeckInfoText" class="modal">
+        <h2>Texto</h2>
+        <button class="closeModal">Cerrar</button>
+        <p id="modalDeckInfoParagraph"></p>
+    </div>
+    <div id="modalDeckInfoGoals" class="modal">
+        <h2>Cálculos</h2>
+        <button class="closeModal">Cerrar</button>
+        <table id="modalDeckInfoGoalsTable">
+            <thead>
+                <tr>
+                    <th>Objetivo</th>
+                    <th>Porcentaje</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </div>
     <div id="modal-overlay"></div>
 
     <script src="js/listeners.js"></script>
+    <script src="js/analyze.js"></script>
     <script src="js/probabilities.js"></script>
     <script src="js/companion.js"></script>
+    <script src="js/deck.js"></script>
+    <script>
+        let text = localStorage.getItem('text');
+        let cardCounts = {};
+        let totalCards = 0;
+        let cardsWithInfo = {};
+        let goalSelects = {};
+        if (text) {
+            document.getElementById('cardData').value = text;
+            cardCounts = JSON.parse(localStorage.getItem('cardCounts'));
+            totalCards = localStorage.getItem('totalCards');
+            cardsWithInfo = JSON.parse(localStorage.getItem('cardsWithInfo'));
+            goalSelects = JSON.parse(localStorage.getItem('goalSelects'));
+            showTabs();
+        }
+    </script>
 </body>
 </html>

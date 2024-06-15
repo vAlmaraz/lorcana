@@ -3,8 +3,11 @@ body {
     font-family: Arial, sans-serif;
     margin: 20px;
 }
-.tabs {
-    display: flex;
+#loading {
+    display: none;
+}
+#tabs {
+    display: none;
     margin-bottom: 20px;
     cursor: pointer;
     border-bottom: 1px solid black;
@@ -53,6 +56,15 @@ th, td {
 td select {
     width: 100%;
     text-align: left;
+}
+.right {
+    float: right;
+}
+.left {
+    float: left;
+}
+.clear {
+    clear: both;
 }
 .modal {
     display: none;
