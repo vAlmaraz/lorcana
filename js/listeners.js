@@ -41,11 +41,12 @@ document.getElementById('deckInfoCalculate').addEventListener('click', function(
 
 Array.from(document.getElementsByClassName('closeModal')).forEach(function(closeModalButton) {
     closeModalButton.addEventListener('click', function() {
-        Array.from(document.getElementsByClassName('modal')).forEach(function(element) {
-            element.style.display = 'none';
-        });
-        document.getElementById('modal-overlay').style.display = 'none';
+        closeModal();
     });
+});
+
+document.getElementById('modal-overlay').addEventListener('click', function() {
+    closeModal();
 });
 
 function showTab(contentId, tabId) {
@@ -57,4 +58,11 @@ function showTab(contentId, tabId) {
 
     document.getElementById(contentId).classList.add('tab-content-active');
     document.getElementById(tabId).classList.add('tab-active');
+}
+
+function closeModal() {
+    Array.from(document.getElementsByClassName('modal')).forEach(function(element) {
+        element.style.display = 'none';
+    });
+    document.getElementById('modal-overlay').style.display = 'none';
 }
